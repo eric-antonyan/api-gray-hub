@@ -46,7 +46,7 @@ app.use(morgan(customFormat));
 
 const user = {
     username: "gor_manukyan",
-    password: "$2b$10$vRw496YdSKSmAn3wnFc6seIRCG.x9xEHNTgA.diia/IiIYStXzHcW",
+    password: "$2b$12$CtclMeWJZix/o6R/7jbhO.RzQWnGgYqHkYu4NKlahAEFCRA7YBK56",
     bio: "Ես մեծ հետաքրքրություն ունեմ տեխնոլոգիաների հանդեպ, և սիրում եմ փորձարկել նոր սարքեր ու ծրագրեր: Ազատ ժամանակս հիմնականում անցկացնում եմ ֆուտբոլ դիտելով կամ շախմատ խաղալով ։ Սիրածս ֆուտբոլի թիմը Barcelona-ն է: Գիտակցելով ժամանակակից աշխարհի կարևորությունը, նաև փորձում եմ սովորել նոր լեզուներ՝ թե՛ ծրագրավորման, թե՛ մարդկային։ Դե իհարկե, շաբաթը մի քանի անգամ վազքով եմ զբաղվում՝ առողջությունս պահպանելու համար, մեկ էլ սիրում եմ շատ և անիմաստ խոսել։",
     age: 58,
     image: "https://media.istockphoto.com/id/880486494/photo/smiling-businessman-using-laptop.jpg?s=612x612&w=0&k=20&c=jNCdH9BlNovO74PeVmSJxVW3SsTktEPK8b4JygmfdqY=",

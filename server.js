@@ -5,6 +5,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import basicAuth from 'basic-auth';
+import path from "path";
+import { fileURLToPath } from 'url';
 
 // Initialize environment variables from .env file
 dotenv.config();
@@ -27,9 +29,12 @@ const authMiddleware = (req, res, next) => {
     if (user && user.name === 'admin' && user.pass === 'password') {
         return next();
     } else {
-        return res.status(401).send('Authentication required.');
+        return res.sendStatus(401)
     }
 };
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Custom morgan format with timestamp
 const customFormat = (tokens, req, res) => {
@@ -40,7 +45,7 @@ const customFormat = (tokens, req, res) => {
 app.use(morgan(customFormat));
 
 const user = {
-    username: "gor__m__yan",
+    username: "gor_manukyan",
     password: "$2b$10$vRw496YdSKSmAn3wnFc6seIRCG.x9xEHNTgA.diia/IiIYStXzHcW",
     bio: "Ես մեծ հետաքրքրություն ունեմ տեխնոլոգիաների հանդեպ, և սիրում եմ փորձարկել նոր սարքեր ու ծրագրեր: Ազատ ժամանակս հիմնականում անցկացնում եմ ֆուտբոլ դիտելով կամ շախմատ խաղալով ։ Սիրածս ֆուտբոլի թիմը Barcelona-ն է: Գիտակցելով ժամանակակից աշխարհի կարևորությունը, նաև փորձում եմ սովորել նոր լեզուներ՝ թե՛ ծրագրավորման, թե՛ մարդկային։ Դե իհարկե, շաբաթը մի քանի անգամ վազքով եմ զբաղվում՝ առողջությունս պահպանելու համար, մեկ էլ սիրում եմ շատ և անիմաստ խոսել։",
     age: 58,
@@ -81,6 +86,15 @@ app.post('/login', authMiddleware, async (req, res) => {
 app.get("/user", authMiddleware, (req, res) => {
     res.send(user);
 })
+
+app.get('/public/assets/files/key/secret/zip', (req, res, next) => {
+    const filePath = path.join(__dirname, 'public', 'secret.zip');
+    res.sendFile(filePath, (err) => {
+        if (err) {
+            next(err);
+        }
+    });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {

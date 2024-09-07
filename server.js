@@ -13,23 +13,17 @@ dotenv.config();
 
 const app = express();
 
-
 app.use(express.json());
-
-
-app.use(cors({
-
-}));
+app.use(cors({}));
 
 const authMiddleware = (req, res, next) => {
     const user = basicAuth(req);
     console.log(user);
 
-
     if (user && user.name === 'admin' && user.pass === 'password') {
         return next();
     } else {
-        return res.sendStatus(401)
+        return res.sendStatus(401);
     }
 };
 
@@ -66,6 +60,18 @@ const user = {
         return customUser;
     }
 };
+
+// Middleware to log request details for /login
+const loginLoggingMiddleware = (req, res, next) => {
+    if (req.path === '/login' && req.method === 'POST') {
+        const timestamp = new Date().toISOString();
+        console.log(`[${timestamp}] ${req.method} ${req.url} - Request Body: ${JSON.stringify(req.body)}`);
+    }
+    next();
+};
+
+// Apply the logging middleware to /login route
+app.use('/login', loginLoggingMiddleware);
 
 app.post('/login', authMiddleware, async (req, res) => {
     try {
